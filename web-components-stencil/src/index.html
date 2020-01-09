@@ -41,13 +41,15 @@
 </head>
 <body>
 
+
+    <stock-price input-stock-symbol="AAPL"></stock-price>
+
+
+
   <!-- <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component> -->
-  <button id="sideDrawerBtn"> Open Side Menu</button>
-  <p class="tooltipContainer">Let's test this new <tool-tip text="Sample Text">Tooltip!</tool-tip></p>
-
-
-  <!-- Web components -->
-  <side-drawer heading-title="Main Menu">
+  <!-- <button id="sideDrawerBtn"> Open Side Menu</button> -->
+  <!-- <p class="tooltipContainer">Let's test this new <tool-tip text="Sample Text">Tooltip!</tool-tip></p> -->
+  <!-- <side-drawer heading-title="Main Menu">
     <nav class="side-nav">
       <ul>
         <li><a href="/">A Link</a></li>
@@ -55,20 +57,20 @@
         <li><a href="/">A third Link</a></li>
       </ul>
     </nav>
-  </side-drawer>
+  </side-drawer> -->
 
   <script>
-    const sideDrawerBtn = document.querySelector('#sideDrawerBtn');
-    const sideDrawer = document.querySelector('side-drawer');
+    // const sideDrawerBtn = document.querySelector('#sideDrawerBtn');
+    // const sideDrawer = document.querySelector('side-drawer');
 
-    sideDrawerBtn.addEventListener('click', () => {
-      // Here 'open' is a prop of the sideDrawer web component.
-      if(!sideDrawer.open) {
-        // sideDrawer.open = true;
-        // sideDrawer.setAttribute('open', true);
-        sideDrawer.openSideDrawer();
-      }
-    });
+    // sideDrawerBtn.addEventListener('click', () => {
+    //   // Here 'open' is a prop of the sideDrawer web component.
+    //   if(!sideDrawer.open) {
+    //     // sideDrawer.open = true;
+    //     // sideDrawer.setAttribute('open', true);
+    //     sideDrawer.openSideDrawer();
+    //   }
+    // });
 
 
     // setTimeout(() => {
