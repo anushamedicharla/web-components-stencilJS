@@ -10,6 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface LoadingSpinner {}
   interface MyComponent {
     /**
     * The first name
@@ -29,6 +30,7 @@ export namespace Components {
     'open': boolean;
     'openSideDrawer': () => Promise<void>;
   }
+  interface StockFinder {}
   interface StockPrice {
     'inputStockSymbol': string;
   }
@@ -40,6 +42,12 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLLoadingSpinnerElement extends Components.LoadingSpinner, HTMLStencilElement {}
+  var HTMLLoadingSpinnerElement: {
+    prototype: HTMLLoadingSpinnerElement;
+    new (): HTMLLoadingSpinnerElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
@@ -50,6 +58,12 @@ declare global {
   var HTMLSideDrawerElement: {
     prototype: HTMLSideDrawerElement;
     new (): HTMLSideDrawerElement;
+  };
+
+  interface HTMLStockFinderElement extends Components.StockFinder, HTMLStencilElement {}
+  var HTMLStockFinderElement: {
+    prototype: HTMLStockFinderElement;
+    new (): HTMLStockFinderElement;
   };
 
   interface HTMLStockPriceElement extends Components.StockPrice, HTMLStencilElement {}
@@ -64,14 +78,17 @@ declare global {
     new (): HTMLToolTipElement;
   };
   interface HTMLElementTagNameMap {
+    'loading-spinner': HTMLLoadingSpinnerElement;
     'my-component': HTMLMyComponentElement;
     'side-drawer': HTMLSideDrawerElement;
+    'stock-finder': HTMLStockFinderElement;
     'stock-price': HTMLStockPriceElement;
     'tool-tip': HTMLToolTipElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface LoadingSpinner {}
   interface MyComponent {
     /**
     * The first name
@@ -90,6 +107,9 @@ declare namespace LocalJSX {
     'headingTitle'?: string;
     'open'?: boolean;
   }
+  interface StockFinder {
+    'onCurrentSymbolSelected'?: (event: CustomEvent<string>) => void;
+  }
   interface StockPrice {
     'inputStockSymbol'?: string;
   }
@@ -98,8 +118,10 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'loading-spinner': LoadingSpinner;
     'my-component': MyComponent;
     'side-drawer': SideDrawer;
+    'stock-finder': StockFinder;
     'stock-price': StockPrice;
     'tool-tip': ToolTip;
   }
@@ -111,8 +133,10 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'loading-spinner': LocalJSX.LoadingSpinner & JSXBase.HTMLAttributes<HTMLLoadingSpinnerElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
       'side-drawer': LocalJSX.SideDrawer & JSXBase.HTMLAttributes<HTMLSideDrawerElement>;
+      'stock-finder': LocalJSX.StockFinder & JSXBase.HTMLAttributes<HTMLStockFinderElement>;
       'stock-price': LocalJSX.StockPrice & JSXBase.HTMLAttributes<HTMLStockPriceElement>;
       'tool-tip': LocalJSX.ToolTip & JSXBase.HTMLAttributes<HTMLToolTipElement>;
     }

@@ -8,6 +8,12 @@
   <script type="module" src="/build/mycomponent.esm.js"></script>
   <script nomodule src="/build/web-components-stencil.js"></script>
   <style>
+    html {
+        --color-primary: #000872;
+        --color-primary-inverse: white;
+        --color-primary-highlight: #0310bd;
+    }
+
     body {
       font-family: sans-serif;
     }
@@ -43,7 +49,7 @@
 
 
     <stock-price input-stock-symbol="AAPL"></stock-price>
-
+    <stock-finder></stock-finder>
 
 
   <!-- <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component> -->
@@ -60,6 +66,12 @@
   </side-drawer> -->
 
   <script>
+    // const stockFinder = document.querySelector('stock-finder');
+    // stockFinder.addEventListener('currentSymbolSelected', event => {
+    //   console.log(event);
+    // });
+
+
     // const sideDrawerBtn = document.querySelector('#sideDrawerBtn');
     // const sideDrawer = document.querySelector('side-drawer');
 

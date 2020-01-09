@@ -1,4 +1,4 @@
-import { Component, h, State, Element, Method, Prop, Watch } from "@stencil/core";
+import { Component, h, State, Element, Method, Prop, Watch, Listen } from "@stencil/core";
 import { AV_API_KEY } from '../../global/global';
  
 @Component({
@@ -17,6 +17,7 @@ export class StockPrice {
     @State() stockUserInput: string;
     @State() stockInputValid = false;
     @State() errProp: string;
+    @State() loading = false;
     
 
     @Prop({mutable: true, reflect: true}) inputStockSymbol: string;
@@ -45,6 +46,19 @@ export class StockPrice {
         //     this.initialStockSymbol = this.inputStockSymbol;
         //     this.fetchStockPrice(this.inputStockSymbol);
         // }
+    }
+
+    /* 
+        This Listen decorator allows us to any emited events. By default it only listens for events inside this shadow DOM.
+        To ensure for it to listen to any global event, we need to attach 'body:' to the event name.
+    */
+    @Listen('body:currentSymbolSelected')
+    onStockSymbolSelected(event: CustomEvent) {
+        console.log('stock symbol selected', event.detail);
+        if(event.detail && event.detail !== this.inputStockSymbol) {
+            this.inputStockSymbol = event.detail;
+            this.stockInputValid = true;
+        }
     }
 
     componentWillUpdate(){
@@ -81,10 +95,20 @@ export class StockPrice {
         console.log('Submitted...');
     }
 
+    /*  A reserved method name that can return some metadata about this custom host element.
+        Hostdata is executed whenever render method is executed. */
+    hostData() {
+        return {
+            class: this.errProp ? 'error' : ''
+        }
+    }
+
     fetchStockPrice(stockSymbol:string) {
+        this.loading = true;
         /* Fetch API is built into modern browsers */
         fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockSymbol}&apikey=${AV_API_KEY}`)
             .then(res => {
+                this.loading = false;
                 return res.json();
             })
             .then(parsedRes => {
@@ -96,7 +120,9 @@ export class StockPrice {
                 this.errProp = null;
             })
             .catch(err => {
+                this.loading = false;
                 this.errProp = err.message;
+                this.fetchPrice = null;
             });
     }
 
@@ -117,6 +143,10 @@ export class StockPrice {
             dataContent = <p>{this.errProp}</p>
         } else if (this.fetchPrice) {
             dataContent = <p>Price: ${this.fetchPrice}</p>;
+        } 
+
+        if(this.loading) {
+            dataContent = <loading-spinner></loading-spinner>;
         }
         /*  ref attribute is a feature of stencil that allows us to assign our class prop to an HTML element refernce 
             using a callback Method. This way is an alternative to using the @Element decorator for the whole
@@ -126,7 +156,7 @@ export class StockPrice {
                 <input id="stock-symbol" ref={el => this.stockInput = el}
                     value={this.stockUserInput}
                     onInput={this.onUserInput.bind(this)}/>
-                <button type="submit" disabled={!this.stockInputValid}>Fetch</button>
+                <button type="submit" disabled={!this.stockInputValid || this.loading}>Fetch</button>
             </form>,
             <div>
                 {dataContent}
