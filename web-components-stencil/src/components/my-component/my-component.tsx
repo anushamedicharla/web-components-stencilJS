@@ -27,6 +27,8 @@ export class MyComponent {
   }
 
   render() {
+    /*  If any of the property values change, stencil will rerun this render method and 
+        update the DOM */
     return <div>Hello, World! I'm {this.getText()}</div>;
   }
 }

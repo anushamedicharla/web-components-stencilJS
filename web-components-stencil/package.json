@@ -1,28 +1,24 @@
 {
-  "name": "web-components-stencil",
+  "name": "component-starter",
   "version": "0.0.1",
   "description": "Stencil Component Starter",
+  "module": "dist/esm/index.js",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/types/index.d.ts",
+  "unpkg": "dist/ionic.js",
+  "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/web-components-stencil/web-components-stencil.js",
   "files": [
-    "dist/",
-    "loader/"
+    "dist/"
   ],
   "scripts": {
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "test.watch": "stencil test --spec --e2e --watchAll"
   },
+  "dependencies": {},
   "devDependencies": {
-    "@stencil/core": "^1.8.4"
+    "@stencil/core": "~0.15.2"
   },
   "license": "MIT"
 }

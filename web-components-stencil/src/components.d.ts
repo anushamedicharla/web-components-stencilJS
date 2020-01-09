@@ -24,6 +24,14 @@ export namespace Components {
     */
     'middle': string;
   }
+  interface SideDrawer {
+    'headingTitle': string;
+    'open': boolean;
+    'openSideDrawer': () => Promise<void>;
+  }
+  interface ToolTip {
+    'text': string;
+  }
 }
 
 declare global {
@@ -34,8 +42,22 @@ declare global {
     prototype: HTMLMyComponentElement;
     new (): HTMLMyComponentElement;
   };
+
+  interface HTMLSideDrawerElement extends Components.SideDrawer, HTMLStencilElement {}
+  var HTMLSideDrawerElement: {
+    prototype: HTMLSideDrawerElement;
+    new (): HTMLSideDrawerElement;
+  };
+
+  interface HTMLToolTipElement extends Components.ToolTip, HTMLStencilElement {}
+  var HTMLToolTipElement: {
+    prototype: HTMLToolTipElement;
+    new (): HTMLToolTipElement;
+  };
   interface HTMLElementTagNameMap {
     'my-component': HTMLMyComponentElement;
+    'side-drawer': HTMLSideDrawerElement;
+    'tool-tip': HTMLToolTipElement;
   }
 }
 
@@ -54,9 +76,18 @@ declare namespace LocalJSX {
     */
     'middle'?: string;
   }
+  interface SideDrawer {
+    'headingTitle'?: string;
+    'open'?: boolean;
+  }
+  interface ToolTip {
+    'text'?: string;
+  }
 
   interface IntrinsicElements {
     'my-component': MyComponent;
+    'side-drawer': SideDrawer;
+    'tool-tip': ToolTip;
   }
 }
 
@@ -67,6 +98,8 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+      'side-drawer': LocalJSX.SideDrawer & JSXBase.HTMLAttributes<HTMLSideDrawerElement>;
+      'tool-tip': LocalJSX.ToolTip & JSXBase.HTMLAttributes<HTMLToolTipElement>;
     }
   }
 }

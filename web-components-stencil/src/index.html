@@ -5,13 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
 
-  <script type="module" src="/build/web-components-stencil.esm.js"></script>
+  <script type="module" src="/build/mycomponent.esm.js"></script>
   <script nomodule src="/build/web-components-stencil.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    .side-nav ul {
+      list-style: none;
+    }
+
+    .side-nav li {
+      margin: 1rem 0;
+    }
+
+    .side-nav a {
+      text-decoration: none;
+      color: black;
+    }
+
+    #sideDrawerBtn {
+      z-index: 9;
+      background: black;
+      color: white;
+      position: absolute;
+      right: 0;
+    }
+
+    .tooltipContainer {
+      display: flex;
+    }
+  </style>
 
 </head>
 <body>
 
-  <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+  <!-- <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component> -->
+  <button id="sideDrawerBtn"> Open Side Menu</button>
+  <p class="tooltipContainer">Let's test this new <tool-tip text="Sample Text">Tooltip!</tool-tip></p>
+
+
+  <!-- Web components -->
+  <side-drawer heading-title="Main Menu">
+    <nav class="side-nav">
+      <ul>
+        <li><a href="/">A Link</a></li>
+        <li><a href="/">Another Link</a></li>
+        <li><a href="/">A third Link</a></li>
+      </ul>
+    </nav>
+  </side-drawer>
+
+  <script>
+    const sideDrawerBtn = document.querySelector('#sideDrawerBtn');
+    const sideDrawer = document.querySelector('side-drawer');
+
+    sideDrawerBtn.addEventListener('click', () => {
+      // Here 'open' is a prop of the sideDrawer web component.
+      if(!sideDrawer.open) {
+        // sideDrawer.open = true;
+        // sideDrawer.setAttribute('open', true);
+        sideDrawer.openSideDrawer();
+      }
+    });
+
+
+    // setTimeout(() => {
+      // sideDrawer.headingTitle = 'It Changed!';
+
+      // This changes the main attribute value as well.
+    //   sideDrawer.setAttribute('heading-title', 'It changed via Attribute!');
+    // }, 3000);
+  </script>
 
 </body>
 </html>

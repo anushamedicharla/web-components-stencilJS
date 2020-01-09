@@ -1,0 +1,38 @@
+:host {
+    position: relative;
+}
+
+.toolTip {
+    display: inline-block;
+    margin-left: 3px;
+}
+
+.toolTip .icon {
+    background: black;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.45rem;
+    margin: 0 0.25rem;
+    position: relative;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.toolTip .text {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background: black;
+    color: white;
+    position: absolute;
+    padding: 0.5rem;
+    width: 8rem;
+    top: 0.5rem;
+    left: 1.5rem;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.26)
+}
+
+.toolTip .text.active {
+    opacity: 1;
+}
